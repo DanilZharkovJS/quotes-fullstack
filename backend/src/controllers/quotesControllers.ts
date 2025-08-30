@@ -1,6 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http'
 import { getQuotes } from '../services/getQuotes.ts'
 import { postQuote } from '../services/postQuote.ts'
+import { deleteQuote } from '../services/deleteQuote.ts'
 
 export const getQuotesController = (
   req: IncomingMessage,
@@ -16,3 +17,9 @@ export const postQuoteController = (
   postQuote(req, res)
 }
  
+export const deleteQuoteController = (
+  req: IncomingMessage,
+  res: ServerResponse
+) => {
+  deleteQuote(req, res)
+}

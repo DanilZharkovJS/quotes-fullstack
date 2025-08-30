@@ -1,5 +1,6 @@
 import http, { createServer } from 'http'
 import {
+  deleteQuoteController,
   getQuotesController,
   postQuoteController,
 } from './controllers/quotesControllers.ts'
@@ -13,6 +14,10 @@ const server = createServer((req, res) => {
 
   if (req.url === '/quotes' && req.method === 'POST') {
     return postQuoteController(req, res)
+  }
+
+  if (req.url === '/quotes' && req.method === 'DELETE') {
+    return deleteQuoteController(req, res)
   }
 
   req.statusCode = 404
