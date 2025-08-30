@@ -1,7 +1,7 @@
 import { IncomingMessage, ServerResponse } from 'http'
 import quotes from '../data/quotes.json' with { type: 'json' }
 
-export const getQuotes = (req: IncomingMessage, res: ServerResponse) => {
+export const getQuotes = async (req: IncomingMessage, res: ServerResponse) => {
   res.setHeader('Content-Type', 'application/json')
   try {
     res.statusCode = 200

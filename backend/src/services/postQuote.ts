@@ -2,7 +2,15 @@ import { IncomingMessage, ServerResponse } from "http";
 import fs from "fs/promises";
 import path from 'path';
 import { fileURLToPath } from 'url';
-import quotes from '../data/quotes.json' with {type: 'json'}
+import {v4 as uuid} from 'uuid'
+import quotesData from '../data/quotes.json' with {type: 'json'} 
+interface Quote {
+  id: string;
+  text?: string;
+  author?: string;
+}
+
+const quotes: Quote[] = quotesData as unknown as Quote[];
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -16,8 +24,12 @@ export const postQuote = (req: IncomingMessage, res: ServerResponse) => {
       })
       req.on('end', async () => {
         const parsedBody = JSON.parse(body)
+        const newQuote: Quote = {
+          id: uuid(),
+          ...parsedBody
+        }
 
-        quotes.push(parsedBody)
+        quotes.push(newQuote)
         await fs.writeFile(path.join(__dirname, '../data/quotes.json'), JSON.stringify(quotes));
 
         res.statusCode = 201
