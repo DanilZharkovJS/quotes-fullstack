@@ -28,7 +28,7 @@ const GetQuotesPage: React.FC = () => {
     <div>
       {quotes.length > 0 &&
         quotes.map((q: Quote, i) => {
-          return <div className='text-white' key={i}>{q.name}</div>
+          return <div className='text-black' key={i}>{q.name}</div>
         })}
     </div>
   )
